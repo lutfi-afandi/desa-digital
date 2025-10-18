@@ -24,16 +24,4 @@ class UserStoreRequest extends FormRequest
             'password' => 'Kata sandi',
         ];
     }
-
-    public function messages()
-    {
-        return [
-            'string' => ':attribute harus String',
-            'required' => ':attribute harus diisi',
-            'max' => ':attribute maksimal :max karakter',
-            'min' => ':attribute Minimal :min karakter',
-            'unique' => ':attribute sudah ada',
-            'email' => ':attribute harus berupa email',
-        ];
-    }
 }
