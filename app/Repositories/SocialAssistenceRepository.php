@@ -87,12 +87,51 @@ class SocialAssistenceRepository implements SocialAssistenceRepositoryInterface
         string $id,
         array $data
     ) {
-        // implementation...
+        DB::beginTransaction();
+
+        try {
+            $socialAssistance = SocialAssistance::find($id);
+
+            if (isset($data['thumbnail'])) {
+                $socialAssistance->thumbnail = $data['thumbnail']->store('assets/social-assistances', 'public');
+            }
+
+            $socialAssistance->name = $data['name'];
+            $socialAssistance->category = $data['category'];
+            $socialAssistance->amount = $data['amount'];
+            $socialAssistance->provider = $data['provider'];
+            $socialAssistance->description = $data['description'];
+            $socialAssistance->is_available = $data['is_available'];
+
+            $socialAssistance->save();
+
+            DB::commit();
+
+            return $socialAssistance;
+        } catch (\Exception  $e) {
+            DB::rollBack();
+
+            throw new Exception($e->getMessage());
+        }
     }
 
     public function delete(
         string $id
     ) {
-        // implementation...
+        DB::beginTransaction();
+
+        try {
+            $socialAssistance = SocialAssistance::find($id);
+
+            $socialAssistance->delete();
+
+            DB::commit();
+
+            return $socialAssistance;
+        } catch (\Throwable $th) {
+            DB::rollBack();
+
+            throw new Exception($th->getMessage());
+        }
     }
 }
