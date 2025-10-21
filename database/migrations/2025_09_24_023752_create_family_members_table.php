@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->string('profile_picture')->nullable();
-            $table->integer('identity_number')->unique();
+            $table->bigInteger('identity_number')->unique();
             $table->enum('gender', ['male', 'female']);
             $table->date('date_of_birth');
             $table->string('phone_number')->nullable();
