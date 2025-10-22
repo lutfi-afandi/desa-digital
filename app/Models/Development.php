@@ -21,6 +21,13 @@ class Development extends Model
         'status',
     ];
 
+    public function scopeSearch($query, $term)
+    {
+        return $query->where('name', 'LIKE', '%' . $term . '%')
+            ->orWhere('description', 'LIKE', '%' . $term . '%')
+            ->orWhere('person_in_charge', 'LIKE', '%' . $term . '%');
+    }
+
     public function developmentAplicants()
     {
         return $this->hasMany(DevelopmentApplicant::class);
