@@ -2,7 +2,7 @@
 
 namespace App\Interfaces;
 
-interface DevelopmentRepositoryInterface
+interface DevelopmentApplicantRepositoryInterface
 {
     public function getAll(
         ?string $search,

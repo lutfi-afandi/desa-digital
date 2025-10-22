@@ -21,11 +21,14 @@ class Development extends Model
         'status',
     ];
 
-    public function scopeSearch($query, $term)
+    protected $casts = [
+        'amount' => 'decimal:2',
+    ];
+
+
+    public function scopeSearch($query, $search)
     {
-        return $query->where('name', 'LIKE', '%' . $term . '%')
-            ->orWhere('description', 'LIKE', '%' . $term . '%')
-            ->orWhere('person_in_charge', 'LIKE', '%' . $term . '%');
+        return $query->where('name', 'LIKE', '%' . $search . '%');
     }
 
     public function developmentAplicants()
